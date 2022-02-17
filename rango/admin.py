@@ -3,9 +3,8 @@ from rango.models import Category, Page
 
 # Register your models here.
 
-#class CategoryInline(admin.StackedInline):
-#    model = Category
-#    extra = 3
+class CategotyAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('name',)}
 
 class PageAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -14,8 +13,7 @@ class PageAdmin(admin.ModelAdmin):
         (None, {'fields': ['url']}),
         (None, {'fields': ['views']}),
     ]
-    #inlines = [CategoryInline]
     list_display = ('title', 'category', 'url')
 
-admin.site.register(Category)
+admin.site.register(Category, CategotyAdmin)
 admin.site.register(Page, PageAdmin)
